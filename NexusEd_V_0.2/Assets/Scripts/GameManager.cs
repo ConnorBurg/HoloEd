@@ -35,6 +35,9 @@ public class GameManager : MonoBehaviour
         targetDeviceL.TryGetFeatureValue(CommonUsages.gripButton, out lGripBool);
 
         if(rRayInteractor.TryGetCurrent3DRaycastHit(out RaycastHit resR)){ // Check if rayCast is hitting anything
+            Debug.Log("resR.transform.gameObject = " + resR.transform.gameObject.ToString()); // Debug
+            Debug.Log("cells.Count = " + cells.Count.ToString()); // Debug
+            
             if(cells.Count != 0){
                 cellCurr = cells[findCellRef(getPointedObj(resR))];
                 Debug.Log("cellCurr = " + cellCurr.ToString());
@@ -195,7 +198,15 @@ public class GameManager : MonoBehaviour
         }
 
 
+
     }
+
+    public void clearZone(){
+        for(int i = 0; i < cellsInZone.Count; i++){
+            unGroup(cellsInZone[i]);
+        }
+    }
+
     private void TryInit(){
 
         List<InputDevice> devices = new List<InputDevice>();
@@ -249,6 +260,8 @@ public class GameManager : MonoBehaviour
         
 
     }
+
+    
 }// end GameManager
 
 public class Cell{
