@@ -33,15 +33,18 @@ public class GameManager : MonoBehaviour
 
         targetDeviceR.TryGetFeatureValue(CommonUsages.gripButton, out rGripBool);
         targetDeviceL.TryGetFeatureValue(CommonUsages.gripButton, out lGripBool);
+        
+        
+
 
         if(rRayInteractor.TryGetCurrent3DRaycastHit(out RaycastHit resR)){ // Check if rayCast is hitting anything
             Debug.Log("resR.transform.gameObject = " + resR.transform.gameObject.ToString()); // Debug
             Debug.Log("cells.Count = " + cells.Count.ToString()); // Debug
             
+            // If at least one cell exists.
             if(cells.Count != 0){
                 cellCurr = cells[findCellRef(getPointedObj(resR))];
                 Debug.Log("cellCurr = " + cellCurr.ToString());
-                // zone check returns true if all the criteria for a valid zone placement are met
             }
             
 
@@ -56,11 +59,12 @@ public class GameManager : MonoBehaviour
                         tmpE = newEmptyCell(rightHand, resR);
                         
                     }
-                }else if(findZoneCellRef(resR.transform.gameObject) != -1){
-                    Debug.Log("This cell is indexed: " + findZoneCellRef(resR.transform.gameObject));
+                    
+                }/*else if(findZoneCellRef(resR.transform.gameObject) != -1){
+                    Debug.Log("This c   ell is indexed: " + findZoneCellRef(resR.transform.gameObject));
                     if(rGripBool)
                         unGroup(cellsInZone[findZoneCellRef(resR.transform.gameObject)]);
-                }
+                }*/
             }
         }
 
@@ -74,7 +78,7 @@ public class GameManager : MonoBehaviour
                 }else if(resL.transform.gameObject.Equals(eCellBucket) && lGripBool){
                     if(cells.Count == 0 || (!eCellGrabbable.isSelected && !fCellGrabbable.isSelected)){
                         tmpE = newEmptyCell(leftHand, resL);
-                    }
+                    } 
                 }
             } 
         }
@@ -84,7 +88,7 @@ public class GameManager : MonoBehaviour
         if(cellsTmpZone.Count != 0){
             //cellCurr = cellsTmpZone[0];
             if(cells.Count != 0 && zoneCheck(cellCurr)){
-                group(cellCurr); // Group the cell
+                group(cellCurr); // Group the cell 
                 Debug.Log("Dropped In Zone"); // Debug
             }   
         }*/
@@ -146,7 +150,7 @@ public class GameManager : MonoBehaviour
 
         float zUpper = fractionZone.transform.position.z + 2.5f;
         float zLower = fractionZone.transform.position.z - 2.5f;
-
+      
         if(xUpper > _cell.transform.position.x && xLower < _cell.transform.position.x)
             if(zUpper > _cell.transform.position.z && zLower < _cell.transform.position.z)
                 return true;
@@ -196,9 +200,6 @@ public class GameManager : MonoBehaviour
         for(int i = 0; i < cellsInZone.Count; i++){
             cellsInZone[i].getCell().transform.position = new Vector3(fractionZone.transform.position.x + (.125f * i), fractionZone.transform.position.y, fractionZone.transform.position.z);
         }
-
-
-
     }
 
     public void clearZone(){
@@ -249,19 +250,15 @@ public class GameManager : MonoBehaviour
     }
     private GameObject newEmptyCell(ActionBasedController hand, RaycastHit res){
         
-            GameObject tmp = Instantiate(eCell, res.point, hand.transform.rotation);
-            cells.Add(new Cell(tmp, 1));
-            cellsTmpZone.Add(cells[cells.Count - 1]);
-            fCellGrabbable = tmp.GetComponent<XRGrabInteractable>();
-            tmp.transform.parent = tmpZone.transform;
-            Debug.Log("New Spawn. Global Cells: " + cells.Count);
+        GameObject tmp = Instantiate(eCell, res.point, hand.transform.rotation);
+        cells.Add(new Cell(tmp, 1));
+        cellsTmpZone.Add(cells[cells.Count - 1]);
+        fCellGrabbable = tmp.GetComponent<XRGrabInteractable>();
+        tmp.transform.parent = tmpZone.transform;
+        Debug.Log("New Spawn. Global Cells: " + cells.Count);
 
-            return tmp;
-        
-
-    }
-
-    
+        return tmp;
+    }  
 }// end GameManager
 
 public class Cell{
