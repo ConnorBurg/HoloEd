@@ -578,6 +578,24 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "Select_A",
+                    "type": "Button",
+                    "id": "0e0d2ae5-72ee-4ff8-be6d-e92d33c09e0c",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Select_B",
+                    "type": "Button",
+                    "id": "ffb9d431-8574-4fb5-83f2-b3d1414fe37a",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -688,6 +706,28 @@
                     "processors": "",
                     "groups": "Generic XR Controller",
                     "action": "Tracking State",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "6677d536-48b1-45b9-bc1e-fdccb36db0f3",
+                    "path": "<XRController>{RightHand}/primaryButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Generic XR Controller",
+                    "action": "Select_A",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "0ed9d983-7b92-42b0-8720-83f908feaf05",
+                    "path": "<XRController>{RightHand}/secondaryButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Generic XR Controller",
+                    "action": "Select_B",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
@@ -1017,7 +1057,7 @@
                     "isPartOfComposite": false
                 },
                 {
-                    "name": "",                
+                    "name": "",
                     "id": "31d838df-4d4e-4c16-a373-b9c07d9d2e2a",
                     "path": "<XRController>{RightHand}/Primary2DAxis",
                     "interactions": "Sector(directions=12,sweepBehavior=1),Sector(directions=2,sweepBehavior=2)",

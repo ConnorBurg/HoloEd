@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028352, g: 0.22571376, b: 0.30692244, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -2404,29 +2404,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 868aa37eecdac724c8eaad63f8c423bc, type: 3}
---- !u!1 &1169101096 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1154613556154743255, guid: 868aa37eecdac724c8eaad63f8c423bc, type: 3}
-  m_PrefabInstance: {fileID: 1169101095}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1169101097 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6802330819210175808, guid: 868aa37eecdac724c8eaad63f8c423bc, type: 3}
   m_PrefabInstance: {fileID: 1169101095}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1169101098
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1169101096}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 741db861d5819a54d98949a029ac7d84, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  tutorial: {fileID: 1792355485}
 --- !u!114 &1169101099
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2440,19 +2422,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tutorial: {fileID: 1792355485}
---- !u!65 &1169101100
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1169101096}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.37549615, y: 0.56563497, z: 0.65132356}
-  m_Center: {x: 0.15557897, y: -0.005795598, z: -0.006020069}
 --- !u!65 &1169101101
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -5039,6 +5008,18 @@ PrefabInstance:
       propertyPath: spawnPoint
       value: 
       objectReference: {fileID: 872345754}
+    - target: {fileID: 2827504490615772022, guid: 95df02838738fde459096c9b27313ba7, type: 3}
+      propertyPath: select_A_Ref
+      value: 
+      objectReference: {fileID: 1910021321894505323, guid: c348712bda248c246b8c49b3db54643f, type: 3}
+    - target: {fileID: 2827504490615772022, guid: 95df02838738fde459096c9b27313ba7, type: 3}
+      propertyPath: select_B_Ref
+      value: 
+      objectReference: {fileID: 4043597362206909127, guid: c348712bda248c246b8c49b3db54643f, type: 3}
+    - target: {fileID: 2827504490615772022, guid: 95df02838738fde459096c9b27313ba7, type: 3}
+      propertyPath: triggerPress
+      value: 
+      objectReference: {fileID: 83097790271614945, guid: c348712bda248c246b8c49b3db54643f, type: 3}
     - target: {fileID: 4875832526340474195, guid: 95df02838738fde459096c9b27313ba7, type: 3}
       propertyPath: m_Name
       value: Baton
