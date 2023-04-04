@@ -36,13 +36,11 @@ public class properRotation : MonoBehaviour
     //Event listeners toggle the boolean that indicates the object is being grabbed
     private void BoolOn(SelectEnterEventArgs arg0)
     {
-        Debug.Log("WE'RE SELECTING");
         myToggle = true;
     }
 
     private void BoolOff(SelectExitEventArgs arg0)
     {
-        Debug.Log("WE'RE DESELECTING");
         myToggle = false;
     }
 
