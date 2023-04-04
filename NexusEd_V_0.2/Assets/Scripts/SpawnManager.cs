@@ -39,8 +39,8 @@ public class SpawnManager : MonoBehaviour
         int[] numOps = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12};
         int[] tmpFrac = new int[2];
 
-        tmpFrac[1] = denOps[Random.Range(0,3)];
-        tmpFrac[0] = numOps[Random.Range(0, tmpFrac[1] - 1)];
+        tmpFrac[1] = denOps[Random.Range(0,3)]; // denominator
+        tmpFrac[0] = numOps[Random.Range(0, tmpFrac[1] - 1)]; // numerator
 
         return tmpFrac; 
     }

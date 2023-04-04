@@ -16,6 +16,9 @@ public class properRotation : MonoBehaviour
     Vector3 initRot, startPos;
     bool gripBool, primBool, lTrigBool, rTrigBool;
     float[] rhandPos = new float[9]; // cx, cy, cz, px, py, pz, dx, dy, dz;
+    public GameObject player;
+    private bool myAxis = false;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -70,10 +73,20 @@ public class properRotation : MonoBehaviour
         rhandPos[1] = rightHand.transform.position.y;
         rhandPos[2] = rightHand.transform.position.z;
 
+        //Manage where we are relative to the globe
+        if(Math.Abs(player.transform.position.x) > Math.Abs(player.transform.position.z))
+        {
+            myAxis = false;
+        }
+        else if(Math.Abs(player.transform.position.z) > Math.Abs(player.transform.position.x))
+        {
+            myAxis = true;
+        }
+
         // If we're currently grabbing
         if (myToggle)
         {
-            RotateModel();
+            RotateModel(myAxis);
         }
 
         // Update previous at end of the update
@@ -83,9 +96,8 @@ public class properRotation : MonoBehaviour
     }
 
 
-    void RotateModel()
+    void RotateModel(bool axisOfRotation)
     {
-
         //Debug.Log("Selecting Object");
         rhandPos[6] = rhandPos[0] - rhandPos[3]; // dx
         rhandPos[7] = rhandPos[1] - rhandPos[4]; // dy
@@ -97,7 +109,28 @@ public class properRotation : MonoBehaviour
         }
         else
         {
-            myEarth.transform.Rotate(0, 0, rhandPos[7] * 250 * -1, Space.World);
+            if (myAxis)
+            {
+                if(player.transform.position.z < 0)
+                {
+                    myEarth.transform.Rotate(rhandPos[7] * 250, 0, 0, Space.World);
+                }
+                else
+                {
+                    myEarth.transform.Rotate(rhandPos[7] * 250 * -1, 0, 0, Space.World);
+                }
+            }
+            else
+            {
+                if (player.transform.position.x < 0)
+                {
+                    myEarth.transform.Rotate(0, 0, rhandPos[7] * 250 * -1, Space.World);
+                }
+                else
+                {
+                    myEarth.transform.Rotate(0, 0, rhandPos[7] * 250, Space.World);
+                }
+            }
         }
 
     }
