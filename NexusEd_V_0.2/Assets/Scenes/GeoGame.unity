@@ -1581,6 +1581,23 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 1.006341
   m_Center: {x: -0.009745926, y: 0.006980717, z: -0.0042635202}
+--- !u!114 &913894476
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 913894469}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bc33b7f2397a8e44f882cf33e2c27055, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  myEarth: {fileID: 913894469}
+  earthInteractable: {fileID: 913894471}
+  rightHand: {fileID: 2102790897}
+  leftHand: {fileID: 615804963}
+  myToggle: 0
 --- !u!1001 &936850081
 PrefabInstance:
   m_ObjectHideFlags: 0
