@@ -1,11 +1,17 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
+using TMPro;
 
 public class navGameManager : MonoBehaviour
 {
     public GameObject holoSphere;
     public GameObject holoEarth;
+    public GameObject tutText;
+
+    public InputActionReference a_Button = null, lGrip = null, b_button = null, x_Button = null;
+
     private int[] state = new int[2];
 
     private string[] regions = { "Africa", "South America", "Central America", "North America", "The Arctic", "Europe", "Asia", 
@@ -36,6 +42,13 @@ public class navGameManager : MonoBehaviour
         }
 
        //Take actions dependent on current state and current state alone (i.e. listening for submit inputs, showing feedback text, etc.)
-
+       if(state[1] == 0)
+        {
+            if (a_Button.action.triggered)
+            {
+                state[1] = 1;
+                tutText.GetComponentInChildren<TMP_Text>().text = "You can grab the holo-globe to rotate it and place the holo-cube inisde. \n (press A to continue)";
+            }
+        }
     }
 }
