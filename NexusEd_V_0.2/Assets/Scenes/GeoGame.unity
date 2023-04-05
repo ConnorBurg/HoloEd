@@ -158,6 +158,7 @@ MonoBehaviour:
   mySphereManager: {fileID: 0}
   scoreboard: {fileID: 987170823}
   winboard: {fileID: 941935956}
+  ExitTrigger: {fileID: 1797585101}
   myRight: {fileID: 2102790896}
   myLeft: {fileID: 615804962}
   a_Button: {fileID: 1910021321894505323, guid: c348712bda248c246b8c49b3db54643f, type: 3}
@@ -4137,6 +4138,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1797585103}
   - component: {fileID: 1797585102}
+  - component: {fileID: 1797585104}
   m_Layer: 0
   m_Name: ExitTrigger
   m_TagString: Untagged
@@ -4153,10 +4155,10 @@ BoxCollider:
   m_GameObject: {fileID: 1797585101}
   m_Material: {fileID: 0}
   m_IsTrigger: 1
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
-  m_Size: {x: 0.7423272, y: 3.067429, z: 2.2932882}
-  m_Center: {x: -0.1288364, y: 1.0337145, z: 0.2949741}
+  m_Size: {x: 0.81929874, y: 3.7653246, z: 2.2932882}
+  m_Center: {x: -0.16732216, y: 0.68476677, z: 0.2949741}
 --- !u!4 &1797585103
 Transform:
   m_ObjectHideFlags: 0
@@ -4171,6 +4173,24 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1797585104
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1797585101}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d53ab5c15d7a2e24caffff684b7e3e56, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attachedSceneName: 
+  exitDoor: 1
+  myGuy: {fileID: 1797585102}
+  thePlayer: {fileID: 263463243}
+  doorButton: {fileID: 0}
+  a_Button: {fileID: 1910021321894505323, guid: c348712bda248c246b8c49b3db54643f, type: 3}
 --- !u!1 &1825014460
 GameObject:
   m_ObjectHideFlags: 0

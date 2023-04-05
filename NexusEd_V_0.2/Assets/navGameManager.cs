@@ -52,7 +52,7 @@ public class navGameManager : MonoBehaviour
     void Update()
     {
         //First check is to toggle tutorial text (we can do that after we've gone past the welcome message)
-        if(x_Button.action.triggered && state[1] > 1)
+        if((x_Button.action.triggered) && (state[1] >= 1))
         {
             tutText.SetActive(!tutText.activeSelf);
         }

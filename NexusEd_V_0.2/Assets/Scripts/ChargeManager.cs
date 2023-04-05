@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 public class ChargeManager : MonoBehaviour
 {
     public GameObject chargeObj;
@@ -16,16 +18,18 @@ public class ChargeManager : MonoBehaviour
     int ctr = 0, tagCtr = 0, expCtr = 0;
     bool startDelayed = true;
     Queue<Charge> charges = new Queue<Charge>();
+    public InputActionReference y_Button = null;
+    public GameObject winRef;
+    public GameObject exitObject;
+    BoxCollider exitTrigger;
+    TMP_Text winText;
+    public bool canLeave = false;
+    
 
     // Start is called before the first frame update
     void Start()
     {
         tutorialManager = tutorial.GetComponent<TutorialManager>();
-
-        /*
-        tmpCharge = Instantiate(chargeObj, spawnPoint.transform.position, new Quaternion(), spawnPoint.transform);
-        tmpCharge.name = "charge_" + tagCtr.ToString();
-        charges.Enqueue(new Charge(tmpCharge, globalValue));*/
     }
     public void onStart(){
 
@@ -33,6 +37,9 @@ public class ChargeManager : MonoBehaviour
         spawnScript = spawnPoint.GetComponent<SpawnPoint>();
         displayScript = display.GetComponent<DisplayController>();
         globalValue = generateExpression();
+        exitTrigger = exitObject.GetComponent<BoxCollider>();
+
+        winText = winRef.GetComponentInChildren<TMP_Text>();
         //Set the scoreboard to 0
         scoreboard.GetComponentInChildren<TMP_Text>().text = "Score: " + expCtr.ToString();
         
@@ -58,7 +65,10 @@ public class ChargeManager : MonoBehaviour
             expCtr = 0;
             tutorialManager.onStart();
             startDelayed = true;
+        }
 
+        if (y_Button.action.triggered && canLeave) {
+            SceneManager.LoadScene("MainArea", LoadSceneMode.Single);
         }
            
     }
@@ -175,7 +185,7 @@ public class ChargeManager : MonoBehaviour
 
     // Remove a charge from the queue and destroy the game object
     public void removeCharge(GameObject chargeObj){
-        charges.Dequeue();;
+        charges.Dequeue();
         Destroy(chargeObj);
     }
 
@@ -185,18 +195,30 @@ public class ChargeManager : MonoBehaviour
         // Make sure that we're in the tutorial
         if(startDelayed){
             // Hit the tutorial charge and let the TutorialManager know.
+            if(charges.Count > 0)
             if(other.gameObject.name == charges.Peek().getChargeObj().name)
                 tutorialManager.hitCharge();
 
         }else{// Not in the tutorial
             // Check if the charge is the correct one and if the value is correct
-            if(other.gameObject.name == charges.Peek().getChargeObj().name){
+            if(charges.Count > 0)
+            if (other.gameObject.name == charges.Peek().getChargeObj().name){
                 if(charges.Peek().getValue() == globalValue){
                     // If the value is correct, remove the charge and increase the score
                     removeCharge(other.gameObject);
                     expCtr++;
                     // Update the score display
                     scoreboard.GetComponentInChildren<TMP_Text>().text = "Score: " + expCtr.ToString();
+
+                    if (expCtr == 5) {
+                        winRef.SetActive(true);
+                        winText.text = "You've stopped the charge outbreak! Press Y to safely head back to the main area";
+                        canLeave = true;
+                        exitTrigger.enabled = true;
+                        expCtr = 0;
+                        tutorialManager.onStart();
+                        startDelayed = true;
+                    }
                     // Generate a new expression
                     globalValue = generateExpression();
                 }else{// If the value is incorrect, remove the charge and decrease the score

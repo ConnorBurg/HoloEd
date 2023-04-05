@@ -4,6 +4,8 @@ using UnityEngine;
 using UnityEngine.XR;
 using UnityEngine.SceneManagement;
 using UnityEngine.XR.Interaction.Toolkit;
+using UnityEngine.InputSystem;
+using TMPro;
 
 public class doorManager : MonoBehaviour
 {
@@ -13,44 +15,44 @@ public class doorManager : MonoBehaviour
     public GameObject thePlayer;
     public GameObject doorButton;
     private bool inZone;
-    public InputDevice targetDeviceR, targetDeviceL;
-    bool aButton;
+    public InputActionReference a_Button = null;
+    public GameObject mainController;
+
+    private MainManager myMainManager;
 
     // Start is called before the first frame update
     void Start()
     {
 
-        TryInit();
         
+        if ((dataManager.myInstance.gamesCompleted > 0) && (SceneManager.GetActiveScene().name == "MainArea"))
+        {
+            thePlayer.transform.position = dataManager.myInstance.spawnLocation;
+            thePlayer.transform.RotateAround(thePlayer.transform.position, thePlayer.transform.up, 180f);
+        }
+
+
     }
 
     // Update is called once per frame
     void Update()
     {
-
-        if (!targetDeviceR.isValid || !targetDeviceL.isValid)
-            TryInit();
-
-        
-
-
-        if (targetDeviceR.TryGetFeatureValue(CommonUsages.primaryButton, out aButton) && aButton)
-            Debug.Log("A button being pressed");
-
         if (inZone)
         {
             if (!exitDoor)
             {
-                if (targetDeviceR.TryGetFeatureValue(CommonUsages.primaryButton, out aButton) && aButton)
+                if (a_Button.action.triggered)
                 {
-                    SceneManager.LoadScene(attachedSceneName, LoadSceneMode.Additive);
+                    dataManager.myInstance.gamesCompleted++;
+                    dataManager.myInstance.spawnLocation = thePlayer.transform.position;
+                    SceneManager.LoadScene(attachedSceneName, LoadSceneMode.Single);
                 }
             }
             else if (exitDoor)
             {
-                if (targetDeviceR.TryGetFeatureValue(CommonUsages.primaryButton, out aButton) && aButton)
+                if (a_Button.action.triggered)
                 {
-                    SceneManager.LoadScene("MainArea");
+                    SceneManager.LoadScene("MainArea", LoadSceneMode.Single);
                 }
             }
 
@@ -59,43 +61,33 @@ public class doorManager : MonoBehaviour
     }
 
 
-    private void TryInit()
-    {
-
-        List<InputDevice> devices = new List<InputDevice>();
-        //InputDeviceCharacteristics ControllerCharacteristics = InputDeviceCharacteristics.Right | InputDeviceCharacteristics.Controller;
-        InputDevices.GetDevicesWithCharacteristics(InputDeviceCharacteristics.Controller, devices);
-
-        if (devices.Count > 0)
-        {
-            //Debug.Log("Number of Devices: " + devices.Count);
-            targetDeviceL = devices[0];
-            targetDeviceR = devices[1];
-            //Debug.Log("targetDeviceL: " + devices[0].ToString() + " targetDeviceR: " + devices[1].ToString());
-        }
-    }
-
     //OnCollisionEnter is called when a collision starts
-    private void OnCollisionEnter(Collision collision)
+    private void OnTriggerEnter(Collider collision)
     {
-        inZone = true;
+        Debug.Log("COLLISION IS HAPPENING");
         if(collision.gameObject.name == thePlayer.name)
         {
+            Debug.Log("PLAYER COLLISION IS OCCURING");
+
+            inZone = true;
+            /*
             //This is where we spawn the UI
             doorButton.SetActive(true);
-            StartCoroutine(GrowOrShrink(true));
+            StartCoroutine(GrowOrShrink(true));*/
         }
     }
 
     //OnCollisionExit is called when a collision ends
-    private void OnCollisionExit(Collision collision)
+    private void OnTriggerExit(Collider collision)
     {
-        inZone = false;
+        
         if(collision.gameObject.name == thePlayer.name)
         {
+            inZone = false;
+            /*
             //This is where we de-spawn the UI
             StartCoroutine(GrowOrShrink(false));
-            doorButton.SetActive(false);
+            doorButton.SetActive(false); */
         }
     }
 

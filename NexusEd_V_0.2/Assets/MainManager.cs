@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class MainManager : MonoBehaviour
 {
@@ -8,11 +9,20 @@ public class MainManager : MonoBehaviour
     public GameObject trigger1;
     public GameObject trigger2;
     public GameObject trigger3;
+    public string status;
+    public GameObject gameTextObject;
+    TMP_Text gameText;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        gameText = gameTextObject.GetComponentInChildren<TMP_Text>();
+
+        if (dataManager.myInstance.gamesCompleted >= 3)
+        {
+            gameText.text = "Congratulations! You've solved all the system issues in the Space Station. You can now make your trip home safely.";
+        }
+        //myMainManager = mainController.GetComponent<MainManager>();
     }
 
     // Update is called once per frame
@@ -42,6 +52,11 @@ public class MainManager : MonoBehaviour
     {
         // Load the scene that is associated with trigger3
         UnityEngine.SceneManagement.SceneManager.LoadScene("Level3");
+    }
+
+    public void SetStatus()
+    {
+        status = "HELLO CONNOR";
     }
 
 

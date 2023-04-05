@@ -1,17 +1,18 @@
 using System.Collections.Generic;
 using UnityEngine.InputSystem;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using TMPro;
 
 public class GameManager : MonoBehaviour
 {
     public GameObject eCell, fCell, fractionZone;
     GameObject tmpF, tmpE;
-    public InputActionReference a_Button = null, lGrip = null, b_button = null, x_Button = null;
+    public InputActionReference a_Button = null, lGrip = null, b_button = null, x_Button = null, y_Button = null;
     List<GameObject> cells = new List<GameObject>(), fullCells = new List<GameObject>(), emptyCells = new List<GameObject>();
     int[] tmpFrac = new int[2];
     int score = 0;
-    bool canLeave = false;
+    public bool canLeave = false;
     public GameObject fractionDisplay;
     FractionDisplay displayRef; 
     public GameObject scoreboardDisplay;
@@ -24,7 +25,6 @@ public class GameManager : MonoBehaviour
     void Start(){
         displayRef = fractionDisplay.GetComponent<FractionDisplay>();
         scorebordRef = scoreboardDisplay.GetComponent<Scoreboard>();
-
         fractionValueGen();
 
     }
@@ -32,6 +32,10 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update(){
 
+
+        if (canLeave && y_Button.action.triggered) {
+            SceneManager.LoadScene("MainArea", LoadSceneMode.Single);
+        }
         if (x_Button.action.triggered) {
             tutActive = !tutActive;
             tutorialDisplay.SetActive(tutActive);

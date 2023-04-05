@@ -26,6 +26,6 @@ public class Scoreboard : MonoBehaviour
     }
 
     public void winner() {
-        this.GetComponentInChildren<TMP_Text>().text = "Engine Restart Complete!";
+        this.GetComponentInChildren<TMP_Text>().text = "Engine Restart Complete! Press Y to go back to the Main Area!";
     }
 }

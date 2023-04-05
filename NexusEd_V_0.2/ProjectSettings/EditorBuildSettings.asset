@@ -8,6 +8,15 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Charges.unity
     guid: 224ddf74170c79d42b621be5711ee13a
+  - enabled: 1
+    path: Assets/Scenes/MainArea.unity
+    guid: f7ee89efa9efd0a438a2e6528bd7b5a2
+  - enabled: 1
+    path: Assets/Scenes/GeoGame.unity
+    guid: 45d873df42fd0b14882a0cf9a3a06f82
+  - enabled: 1
+    path: Assets/Scenes/FractionGame.unity
+    guid: 9fc0d4010bbf28b4594072e72b8655ab
   m_configObjects:
     Unity.XR.Oculus.Settings: {fileID: 11400000, guid: 4949553739964454eba631a450f5225f, type: 2}
     com.unity.xr.management.loader_settings: {fileID: 11400000, guid: 654d51b1f46c47e42a04921a28b2cdfc, type: 2}
