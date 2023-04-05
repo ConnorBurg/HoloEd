@@ -8,6 +8,20 @@ TagManager:
   - MyEarth
   - RH
   - LH
+  - Africa
+  - SouthAmerica
+  - CentralAmerica
+  - NorthAmerica
+  - Arctic
+  - Europe
+  - Asia
+  - MiddleEast
+  - Oceania
+  - AtlanticOcean
+  - PacificOcean
+  - MediterraneanSea
+  - IndianOcean
+  - Caribbean
   layers:
   - Default
   - TransparentFX
