@@ -12,11 +12,15 @@ public class MainManager : MonoBehaviour
     public string status;
     public GameObject gameTextObject;
     TMP_Text gameText;
+    public GameObject mainCamera;
+    AudioSource introAudio;
 
     // Start is called before the first frame update
     void Start()
     {
         gameText = gameTextObject.GetComponentInChildren<TMP_Text>();
+        introAudio = mainCamera.GetComponent<AudioSource>();
+        introAudio.Play();
 
         if (dataManager.myInstance.gamesCompleted >= 3)
         {

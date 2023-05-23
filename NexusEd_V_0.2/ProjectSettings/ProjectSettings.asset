@@ -12,8 +12,8 @@ PlayerSettings:
   targetDevice: 2
   useOnDemandResources: 0
   accelerometerFrequency: 60
-  companyName: ConnorBurgess
-  productName: BookRobots
+  companyName: NexusEducation
+  productName: SpaceMath
   defaultCursor: {fileID: 0}
   cursorHotspot: {x: 0, y: 0}
   m_SplashScreenBackgroundColor: {r: 0.13725491, g: 0.12156863, b: 0.1254902, a: 1}
@@ -143,10 +143,10 @@ PlayerSettings:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  - {fileID: 11400000, guid: 4949553739964454eba631a450f5225f, type: 2}
-  - {fileID: -2368746515348540469, guid: d9f736dd7151fd347b2aecd272ac0935, type: 2}
   - {fileID: 0}
-  - {fileID: 3783840292744603179, guid: 654d51b1f46c47e42a04921a28b2cdfc, type: 2}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   metroInputSource: 0
   wsaTransparentSwapchain: 0
   m_HolographicPauseOnTrackingLoss: 1
@@ -165,7 +165,7 @@ PlayerSettings:
   androidSupportedAspectRatio: 1
   androidMaxAspectRatio: 2.1
   applicationIdentifier:
-    Android: com.ConnorBurgess.BookRobots
+    Android: com.NexusEducation.SpaceMath
     Standalone: com.ConnorBurgess.BookRobots
   buildNumber:
     Standalone: 0
