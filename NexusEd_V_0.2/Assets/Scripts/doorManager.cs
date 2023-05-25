@@ -17,6 +17,7 @@ public class doorManager : MonoBehaviour
     private bool inZone;
     public InputActionReference a_Button = null;
     public GameObject mainController;
+    public GameObject UIMenu;
 
     private MainManager myMainManager;
 
@@ -70,6 +71,7 @@ public class doorManager : MonoBehaviour
             Debug.Log("PLAYER COLLISION IS OCCURING");
 
             inZone = true;
+            UIMenu.SetActive(true);
             /*
             //This is where we spawn the UI
             doorButton.SetActive(true);
@@ -84,6 +86,7 @@ public class doorManager : MonoBehaviour
         if(collision.gameObject.name == thePlayer.name)
         {
             inZone = false;
+            UIMenu.SetActive(false);
             /*
             //This is where we de-spawn the UI
             StartCoroutine(GrowOrShrink(false));
