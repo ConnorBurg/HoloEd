@@ -36,7 +36,6 @@ public class ChooseGame : MonoBehaviour
         {
             activityManagement(rightRay, colliders[i], unPressed[i], pressed[i]);
             activityManagement(leftRay, colliders[i], unPressed[i], pressed[i]);
-
         }
 
     }
