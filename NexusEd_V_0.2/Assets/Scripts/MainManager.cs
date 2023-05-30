@@ -19,8 +19,8 @@ public class MainManager : MonoBehaviour
     void Start()
     {
         gameText = gameTextObject.GetComponentInChildren<TMP_Text>();
-        introAudio = mainCamera.GetComponent<AudioSource>();
-        introAudio.Play();
+        //introAudio = mainCamera.GetComponent<AudioSource>();
+        //introAudio.Play();
 
         if (dataManager.myInstance.gamesCompleted >= 3)
         {
