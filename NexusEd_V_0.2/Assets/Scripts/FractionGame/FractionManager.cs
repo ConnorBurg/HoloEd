@@ -27,14 +27,10 @@ public class FractionManager : MonoBehaviour
         // Check if the raycast from the left hand or right hand is hitting an object
         if (rightRay.TryGetCurrent3DRaycastHit(out RaycastHit rightInfo)){
             rightHitObject = rightInfo.collider.gameObject;
-            //if(rightHitObject.tag == "FullBin" || rightHitObject.tag == "EmptyBin")
-              //  Debug.Log("Right Hit Object: " + rightHitObject);
         }
 
         if(leftRay.TryGetCurrent3DRaycastHit(out RaycastHit leftInfo)){
             leftHitObject = leftInfo.collider.gameObject;
-            //if(leftHitObject.tag == "FullBin" || leftHitObject.tag == "EmptyBin")
-              //  Debug.Log("Left Hit Object: " + leftHitObject);
         }// end get hit object
 
         // if currcell is not being grabbed, set it to null
@@ -47,7 +43,7 @@ public class FractionManager : MonoBehaviour
         if(rightHitObject.tag == "FullBin" && rGrip.action.triggered && currCell == null){
             // Spawn a new fullCell at the point where the raycast hits the fullbin
             currCell = Instantiate(fullCell, rightInfo.point, Quaternion.identity);  
-        }else if(rightHitObject.tag == "EmptyCell" && rGrip.action.triggered && currCell == null){
+        }else if(rightHitObject.tag == "EmptyBin" && rGrip.action.triggered && currCell == null){
             // Spawn a new emptyCell at the point where the raycast hits the emptybin
             currCell = Instantiate(emptyCell, rightInfo.point, Quaternion.identity);
         }

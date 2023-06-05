@@ -23,7 +23,7 @@ public class ThrowManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
     }
             
     //on trigger enter
@@ -43,9 +43,6 @@ public class ThrowManager : MonoBehaviour
 
             Destroy(other.gameObject);
             fractionZoneRef.redraw(fractionCount);
-
-            //Debug.Log("Fraction Count: " + fractionCount[0] + " " + fractionCount[1]);
-            //destroy the fraction
             
         }
     }
