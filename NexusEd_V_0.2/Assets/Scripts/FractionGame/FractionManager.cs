@@ -7,9 +7,10 @@ using UnityEngine.InputSystem;
 
 public class FractionManager : MonoBehaviour
 {
-    public GameObject emptyBin, fullBin,fullCell, emptyCell, leftHand, rightHand;
+    public GameObject emptyBin, fullBin, fullCell, emptyCell, leftHand, rightHand;
     public InputActionReference a_Button = null, lGrip = null, rGrip = null;
     XRRayInteractor leftRay, rightRay;
+    GameObject currCell = null;
 
     GameObject rightHitObject, leftHitObject;
     // Start is called before the first frame update
@@ -18,7 +19,6 @@ public class FractionManager : MonoBehaviour
         // Get the XR Ray Interactor component on the left hand and right hand
         leftRay = leftHand.GetComponent<XRRayInteractor>();
         rightRay = rightHand.GetComponent<XRRayInteractor>();
-        
     }
 
     // Update is called once per frame
@@ -27,24 +27,38 @@ public class FractionManager : MonoBehaviour
         // Check if the raycast from the left hand or right hand is hitting an object
         if (rightRay.TryGetCurrent3DRaycastHit(out RaycastHit rightInfo)){
             rightHitObject = rightInfo.collider.gameObject;
+            //if(rightHitObject.tag == "FullBin" || rightHitObject.tag == "EmptyBin")
+              //  Debug.Log("Right Hit Object: " + rightHitObject);
         }
 
         if(leftRay.TryGetCurrent3DRaycastHit(out RaycastHit leftInfo)){
             leftHitObject = leftInfo.collider.gameObject;
+            //if(leftHitObject.tag == "FullBin" || leftHitObject.tag == "EmptyBin")
+              //  Debug.Log("Left Hit Object: " + leftHitObject);
         }// end get hit object
 
-        // Hit object compares
-        if(rightHitObject == fullCell){
-            
+        // if currcell is not being grabbed, set it to null
+        if(currCell != null && currCell.GetComponent<XRGrabInteractable>().isSelected == false){
+            currCell = null;
+        }// end grab reset
 
-        }else if(rightHitObject == emptyCell){
-
-
+        // Hit object comparisons
+        // Right Hand Spawns
+        if(rightHitObject.tag == "FullBin" && rGrip.action.triggered && currCell == null){
+            // Spawn a new fullCell at the point where the raycast hits the fullbin
+            currCell = Instantiate(fullCell, rightInfo.point, Quaternion.identity);  
+        }else if(rightHitObject.tag == "EmptyCell" && rGrip.action.triggered && currCell == null){
+            // Spawn a new emptyCell at the point where the raycast hits the emptybin
+            currCell = Instantiate(emptyCell, rightInfo.point, Quaternion.identity);
         }
-
-        if(leftHitObject == fullCell){
-        }
-        else if(leftHitObject == emptyCell){
+    
+        // Left Hand Spawns
+        if(leftHitObject.tag == "FullBin" && lGrip.action.triggered && currCell == null){
+            // Spawn a new fullCell at the point where the raycast hits the fullbin
+            currCell = Instantiate(fullCell, leftInfo.point, Quaternion.identity);
+        }else if(leftHitObject.tag == "EmptyBin" && lGrip.action.triggered && currCell == null){
+            // Spawn a new emptyCell at the point where the raycast hits the emptybin
+            currCell = Instantiate(emptyCell, leftInfo.point, Quaternion.identity);
         }
     }
 }

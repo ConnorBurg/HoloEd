@@ -11,6 +11,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: FuelCell_F 1
       objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 3f75e2b758e484d41b440ab74cc321e5, type: 3}
+      propertyPath: m_TagString
+      value: fullCell
+      objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 3f75e2b758e484d41b440ab74cc321e5, type: 3}
       propertyPath: m_RootOrder
       value: 0

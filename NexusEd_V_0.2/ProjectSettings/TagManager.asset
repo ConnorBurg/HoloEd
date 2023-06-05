@@ -22,6 +22,10 @@ TagManager:
   - MediterraneanSea
   - IndianOcean
   - Caribbean
+  - fullCell
+  - emptyCell
+  - FullBin
+  - EmptyBin
   layers:
   - Default
   - TransparentFX
