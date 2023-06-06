@@ -18,10 +18,4 @@ public class FullRemove : MonoBehaviour
 
     }
 
-    void OnTriggerEnter(Collider other)
-    {
-        if (other.gameObject.name == "XR Controller Left" || other.gameObject.name == "XR Controller Right") {
-            gM_Ref.removeFullCell();  
-        }
-    }
 }

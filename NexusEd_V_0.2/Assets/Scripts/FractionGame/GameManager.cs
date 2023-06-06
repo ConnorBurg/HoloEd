@@ -6,36 +6,40 @@ using TMPro;
 
 public class GameManager : MonoBehaviour
 {
-    public GameObject eCell, fCell, fractionZone;
-    GameObject tmpF, tmpE;
+    // Public Variables
     public InputActionReference a_Button = null, lGrip = null, b_button = null, x_Button = null, y_Button = null;
-    List<GameObject> cells = new List<GameObject>(), fullCells = new List<GameObject>(), emptyCells = new List<GameObject>();
-    int[] tmpFrac = new int[2];
-    int score = 0;
-    public bool canLeave = false;
-    public GameObject fractionDisplay;
-    FractionDisplay displayRef; 
-    public GameObject scoreboardDisplay;
-    Scoreboard scorebordRef;
-    public GameObject tutorialDisplay;
-    bool tutActive = true;
+    public GameObject scoreboardDisplay, fractionDisplay, tutorialDisplay, FractionZoneObject, throwZoneObject;
     public BoxCollider doorTrigger;
+    public bool canLeave = false;
+
+    // Private Variables
+    int[] tmpFrac = new int[2];
+    int score = 0, difficulty = 0;
+    bool tutActive = true;
+
+    // Reference Variables
+    FractionDisplay displayRef; 
+    Scoreboard scorebordRef;
+    FractionZoneManager fractionZoneRef;
+    ThrowManager throwZoneRef;
+    
+   
 
     // Start is called before the first frame update
     void Start(){
         displayRef = fractionDisplay.GetComponent<FractionDisplay>();
         scorebordRef = scoreboardDisplay.GetComponent<Scoreboard>();
+        fractionZoneRef = FractionZoneObject.GetComponent<FractionZoneManager>();
+        throwZoneRef = throwZoneObject.GetComponent<ThrowManager>();
         fractionValueGen();
-
     }
 
     // Update is called once per frame
     void Update(){
-
-
         if (canLeave && y_Button.action.triggered) {
             SceneManager.LoadScene("MainArea", LoadSceneMode.Single);
         }
+
         if (x_Button.action.triggered) {
             tutActive = !tutActive;
             tutorialDisplay.SetActive(tutActive);
@@ -44,95 +48,53 @@ public class GameManager : MonoBehaviour
         if (a_Button.action.triggered) {
             checkFraction();
         }
+
         if(b_button.action.triggered){
-            clearFraction();
+            throwZoneRef.resetCount();
+            fractionZoneRef.clearFraction();
         }// end of clear
     }// end of update
 
-    public void newFullCell(){
-        // instantiate cell at the fraction zone
-        GameObject tmp = Instantiate(fCell, fractionZone.transform.position, fractionZone.transform.rotation);
-        fullCells.Add(tmp); // Add the cell to the full cells list.
-        tmp.transform.position = fractionZone.transform.position;
-        groupCells();
-    }
-
-    public void newEmptyCell(){
-        // instantiate cell at the fraction zone
-        GameObject tmp = Instantiate(eCell, fractionZone.transform.position, fractionZone.transform.rotation); // Instantiate the new cell
-        emptyCells.Add(tmp); // Add the cell to the empty cell list
-        tmp.transform.position = fractionZone.transform.position; // set transform
-        groupCells(); // Regroup the cells
-    }
-
-    public void removeFullCell()
-    {
-        if (fullCells.Count > 0){// Check for elements
-            GameObject cellToRemove = fullCells[fullCells.Count - 1];
-            fullCells.RemoveAt(fullCells.Count - 1); // Remove the last element
-            Destroy(cellToRemove);
-            groupCells(); // Regroup the cells
-        }
-    }
-
-    public void removeEmptyCell() {
-        if (emptyCells.Count > 0) {// Check for elements 
-            GameObject cellToRemove = emptyCells[emptyCells.Count - 1];
-            emptyCells.RemoveAt(emptyCells.Count - 1); // Remove last element
-            Destroy(cellToRemove);
-            groupCells(); // Regroup the cells
-        }
-    }
-
-    private void groupCells() {
-        cells.Clear();
-
-        for (int i = 0; i < emptyCells.Count; i++) {
-            cells.Add(emptyCells[i]);     
-        }
-
-        for (int i = 0; i < fullCells.Count; i++) {
-            cells.Add(fullCells[i]);
-        }
-
-        if (cells.Count > 0) { 
-        //Organize the cells so they are all visible
-            for(int i = 0; i < cells.Count; i++){
-                if(i % 2 == 0)
-                    cells[i].transform.position = new Vector3(fractionZone.transform.position.x - (.25f * i), fractionZone.transform.position.y, fractionZone.transform.position.z);
-                else
-                    cells[i].transform.position = new Vector3(fractionZone.transform.position.x + (.25f * i), fractionZone.transform.position.y, fractionZone.transform.position.z);
-            }
-        }
-    }
-
-    public void checkRefs() {
-        Debug.Log("Refs Called");
-    }
-
     void fractionValueGen(){
 
-        int[] denOps = { 4, 6, 8, 12 };
-        int[] numOps = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12 };
+        if(difficulty == 0){
+            int[] denOps = { 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12 };
+            int[] numOps = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12 };
+            tmpFrac[1] = denOps[Random.Range(0, 3)]; // denominator
+            tmpFrac[0] = numOps[Random.Range(0, tmpFrac[1] - 1)]; // numerator
         
-        tmpFrac[1] = denOps[Random.Range(0, 3)]; // denominator
-        tmpFrac[0] = numOps[Random.Range(0, tmpFrac[1] - 1)]; // numerator
+        }else if(difficulty == 1){
+            int[] denOps = { 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12};
+            int[] numOps = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12 };
+            tmpFrac[1] = denOps[Random.Range(0, 3)]; // denominator
+            tmpFrac[0] = numOps[Random.Range(0, tmpFrac[1] - 1)]; // numerator
 
+        }else if(difficulty == 2){
+            int[] denOps = { 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12 };
+            int[] numOps = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12 };
+            tmpFrac[1] = denOps[Random.Range(0, 3)]; // denominator
+            tmpFrac[0] = numOps[Random.Range(0, tmpFrac[1] - 1)]; // numerator
+
+        }
+
+        // Generate fractions
         displayRef.setDisplay(tmpFrac);
     }
 
     void checkFraction() {
-        int numerator = fullCells.Count;
-        int denom = fullCells.Count + emptyCells.Count;
+        // Need to get the current fraction from the FractionZoneManager
+        int[] frac = fractionZoneRef.getFraction();
+        int num = frac[0];
+        int den = frac[1] + frac[0];
 
-        Debug.Log("NUM: " + numerator + ", " + "DEN: " + denom);
+        if ((num == tmpFrac[0]) && (den == tmpFrac[1])){ // Correct!
 
-
-        if ((numerator == tmpFrac[0]) && (denom == tmpFrac[1]))
-        { // Correct!
-            clearFraction();
+            // Reset the fraction zone and generate a new fraction
+            throwZoneRef.resetCount();
+            fractionZoneRef.clearFraction();
             score++;
             scorebordRef.setDisplay(score);
+
             if (score == 5)
             {
                 scorebordRef.winner();
@@ -143,28 +105,12 @@ public class GameManager : MonoBehaviour
             {
                 fractionValueGen();
             }
+        }else {
+            // Reset the fraction zone and generate a new fraction
+            throwZoneRef.resetCount();
+            fractionZoneRef.clearFraction();
+            fractionValueGen();     
         }
-        else {
-            fractionValueGen();
-            clearFraction();
-        }
-    }
-
-    void clearFraction() {
-
-        //clear the cells
-        for (int i = 0; i < cells.Count; i++)
-        {
-            GameObject cellToDestory = cells[i];
-            Destroy(cellToDestory);
-        }
-
-        // clear the lists
-        fullCells.Clear();
-        emptyCells.Clear();
-        cells.Clear();
-
-
     }
 }
 

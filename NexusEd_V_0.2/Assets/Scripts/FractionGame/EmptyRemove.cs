@@ -18,16 +18,5 @@ public class EmptyRemove : MonoBehaviour
 
     }
 
-    void OnTriggerEnter(Collider other)
-    {
-
-        Debug.Log("Game Object Trigger: " + other.gameObject.name);
-
-       
-        if (other.gameObject.name == "XR Controller Left" || other.gameObject.name == "XR Controller Right")
-        {
-            gM_Ref.removeEmptyCell();
-            
-        }
-    }
+  
 }

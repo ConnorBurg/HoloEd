@@ -25,6 +25,13 @@ public class ThrowManager : MonoBehaviour
     {
 
     }
+
+    public void resetCount(){
+
+        fractionCount[0] = 0;
+        fractionCount[1] = 0;
+        fractionZoneRef.redraw(fractionCount);
+    }
             
     //on trigger enter
     private void OnTriggerEnter(Collider other)

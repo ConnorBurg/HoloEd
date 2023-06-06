@@ -6,13 +6,15 @@ using UnityEngine.XR.Interaction.Toolkit;
 public class FractionZoneManager : MonoBehaviour
 {
 
-    public GameObject fullCell, emptyCell;
+    public GameObject fullCell, emptyCell, throwZoneObject;
     GameObject tempCell;
+    ThrowManager throwZoneRef;
     List<GameObject> currFractionUpper = new List<GameObject>();
     List<GameObject> currFractionLower = new List<GameObject>();
     // Start is called before the first frame update
     void Start()
     {
+        throwZoneRef = throwZoneObject.GetComponent<ThrowManager>();
         
     }
 
@@ -24,28 +26,17 @@ public class FractionZoneManager : MonoBehaviour
         
     }
 
+    public int[] getFraction(){
+
+        int[] fractionCount = new int[2];
+        fractionCount[0] = currFractionUpper.Count;
+        fractionCount[1] = currFractionLower.Count;
+
+        return fractionCount;
+    }
     public void redraw(int[] fractionCount){
 
-        // Instantiate empty cells equal to fractionCount[1]
-        // Destroy the current fraction
-        if(currFractionUpper.Count > 0){
-
-            foreach(GameObject obj in currFractionUpper)
-            {
-                Destroy(obj);
-            }
-
-            currFractionUpper.Clear();
-        }
-
-        if(currFractionLower.Count > 0){
-
-            foreach(GameObject obj in currFractionLower)
-            {
-                Destroy(obj);
-            }
-            currFractionLower.Clear();
-        }
+        clearFraction();
 
         // Create the new fraction
         for(int i = 0; i < fractionCount[0]; i++)
@@ -71,7 +62,27 @@ public class FractionZoneManager : MonoBehaviour
                 
             } 
         }
+    }
 
-        
+    public void clearFraction(){
+
+        if(currFractionUpper.Count > 0){
+
+            foreach(GameObject obj in currFractionUpper)
+            {
+                Destroy(obj);
+            }
+
+            currFractionUpper.Clear();
+        }
+
+        if(currFractionLower.Count > 0){
+
+            foreach(GameObject obj in currFractionLower)
+            {
+                Destroy(obj);
+            }
+            currFractionLower.Clear();
+        }
     }
 }

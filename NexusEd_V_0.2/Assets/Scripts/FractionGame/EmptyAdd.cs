@@ -16,11 +16,4 @@ public class EmptyAdd : MonoBehaviour
     void Update()
     {
     }
-
-     void OnTriggerEnter(Collider other) {
-        if (other.gameObject.name == "XR Controller Left" || other.gameObject.name == "XR Controller Right")
-        {
-            gM_Ref.newEmptyCell();
-        }
-     }
 }
