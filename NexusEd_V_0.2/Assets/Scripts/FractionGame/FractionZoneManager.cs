@@ -19,6 +19,8 @@ public class FractionZoneManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
+        
         
     }
 
@@ -48,8 +50,9 @@ public class FractionZoneManager : MonoBehaviour
         // Create the new fraction
         for(int i = 0; i < fractionCount[0]; i++)
         {
+
             if(i % 2 == 0){
-                currFractionUpper.Add(Instantiate(fullCell, new Vector3(i*.125f,2,0), Quaternion.identity, this.transform));
+                currFractionUpper.Add(Instantiate(fullCell, new Vector3((i+1)*.125f,2,0), Quaternion.identity, this.transform));
                 
             }
             else{
@@ -60,13 +63,15 @@ public class FractionZoneManager : MonoBehaviour
         for(int i = 0; i < fractionCount[1]; i++)
         {
             if(i % 2 == 0){
-                currFractionLower.Add(Instantiate(emptyCell, new Vector3(i*.125f,1,0), Quaternion.identity, this.transform));
+                currFractionLower.Add(Instantiate(emptyCell, new Vector3((i+1)*.125f, 1.4f,0), Quaternion.identity, this.transform));
                 
             }
             else{
-                currFractionLower.Add(Instantiate(emptyCell, new Vector3(i*.125f*(-1),1,0), Quaternion.identity, this.transform));
+                currFractionLower.Add(Instantiate(emptyCell, new Vector3(i*.125f*(-1), 1.4f,0), Quaternion.identity, this.transform));
                 
             } 
         }
+
+        
     }
 }
