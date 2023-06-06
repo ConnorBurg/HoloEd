@@ -87,8 +87,10 @@ public class GameManager : MonoBehaviour
         int[] frac = fractionZoneRef.getFraction();
         int num = frac[0];
         int den = frac[1] + frac[0];
+        float div = ((float)num) / ((float)den);
+        float checkDiv = ((float)tmpFrac[0]) / ((float)tmpFrac[1]);
 
-        if ((num == tmpFrac[0]) && (den == tmpFrac[1])){ // Correct!
+        if ((num == tmpFrac[0]) && (den == tmpFrac[1]) || (div == checkDiv)){ // Correct!
 
             // Reset the fraction zone and generate a new fraction
             throwZoneRef.resetCount();
