@@ -21,8 +21,6 @@ public class FractionZoneManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
-        
         
     }
 
@@ -82,6 +80,7 @@ public class FractionZoneManager : MonoBehaviour
             {
                 Destroy(obj);
             }
+            
             currFractionLower.Clear();
         }
     }

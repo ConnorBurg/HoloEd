@@ -8,8 +8,8 @@ public class GameManager : MonoBehaviour
 {
     // Public Variables
     public InputActionReference a_Button = null, lGrip = null, b_button = null, x_Button = null, y_Button = null;
-    public GameObject scoreboardDisplay, fractionDisplay, tutorialDisplay, FractionZoneObject, throwZoneObject;
-    public BoxCollider doorTrigger;
+    public GameObject scoreboardDisplay, fractionDisplay, tutorialDisplay, FractionZoneObject, throwZoneObject, mainLight, particleLight0, particleLight1;
+    public GameObject doorTrigger;
     public bool canLeave = false;
 
     // Private Variables
@@ -31,6 +31,7 @@ public class GameManager : MonoBehaviour
         scorebordRef = scoreboardDisplay.GetComponent<Scoreboard>();
         fractionZoneRef = FractionZoneObject.GetComponent<FractionZoneManager>();
         throwZoneRef = throwZoneObject.GetComponent<ThrowManager>();
+        toggleLights(false);
         fractionValueGen();
     }
 
@@ -58,21 +59,21 @@ public class GameManager : MonoBehaviour
     void fractionValueGen(){
 
         if(difficulty == 0){
-            int[] denOps = { 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12 };
-            int[] numOps = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12 };
-            tmpFrac[1] = denOps[Random.Range(0, 3)]; // denominator
-            tmpFrac[0] = numOps[Random.Range(0, tmpFrac[1] - 1)]; // numerator
+            int[] denOps = { 2, 3, 4};
+            int[] numOps = { 1, 2, 3};
+            tmpFrac[1] = denOps[Random.Range(0, denOps.Length + 1)]; // denominator
+            tmpFrac[0] = numOps[Random.Range(0, tmpFrac[1] )]; // numerator
         
         }else if(difficulty == 1){
             int[] denOps = { 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12};
             int[] numOps = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12 };
-            tmpFrac[1] = denOps[Random.Range(0, 3)]; // denominator
+            tmpFrac[1] = denOps[Random.Range(0, 13)]; // denominator
             tmpFrac[0] = numOps[Random.Range(0, tmpFrac[1] - 1)]; // numerator
 
         }else if(difficulty == 2){
             int[] denOps = { 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12 };
             int[] numOps = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12 };
-            tmpFrac[1] = denOps[Random.Range(0, 3)]; // denominator
+            tmpFrac[1] = denOps[Random.Range(0, 13)]; // denominator
             tmpFrac[0] = numOps[Random.Range(0, tmpFrac[1] - 1)]; // numerator
 
         }
@@ -99,7 +100,8 @@ public class GameManager : MonoBehaviour
             {
                 scorebordRef.winner();
                 canLeave = true;
-                doorTrigger.enabled = true;
+                doorTrigger.SetActive(true);
+                toggleLights(true);
             }
             else
             {
@@ -111,6 +113,12 @@ public class GameManager : MonoBehaviour
             fractionZoneRef.clearFraction();
             fractionValueGen();     
         }
+    }
+
+    private void toggleLights(bool val){
+        mainLight.SetActive(val);
+        particleLight0.SetActive(val);
+        particleLight1.SetActive(val);
     }
 }
 
