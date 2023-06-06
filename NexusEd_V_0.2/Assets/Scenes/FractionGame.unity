@@ -1280,7 +1280,7 @@ BoxCollider:
   m_GameObject: {fileID: 335431935}
   m_Material: {fileID: 0}
   m_IsTrigger: 1
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 2.6540985, y: 3.171848, z: 1.2208252}
   m_Center: {x: -0.003530264, y: 0.13591969, z: 0.1104126}
@@ -1825,7 +1825,7 @@ MonoBehaviour:
   mainLight: {fileID: 240353887}
   particleLight0: {fileID: 546916364}
   particleLight1: {fileID: 2001531080}
-  doorTrigger: {fileID: 0}
+  doorTrigger: {fileID: 335431935}
   canLeave: 0
 --- !u!4 &611117866
 Transform:
@@ -2538,6 +2538,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 60bad2b54316507479aab4974ae2d765, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  incorrectMaterial: {fileID: 2100000, guid: a46213a1e8db01e489378594c0897d18, type: 2}
+  correctMaterial: {fileID: 2100000, guid: 79d470d1bf7caa549b46c2e5dfb61bcf, type: 2}
+  defaultMaterial: {fileID: 2100000, guid: abd26d1c5d422134a80d96653dcf66aa, type: 2}
+  fractionDisplay: {fileID: 853105920}
 --- !u!1001 &869573411
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3458,6 +3462,14 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+    - target: {fileID: 6480676370767172679, guid: fb5c0c4a26f88c847a76aab1b590b0cc, type: 3}
+      propertyPath: m_Materials.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6480676370767172679, guid: fb5c0c4a26f88c847a76aab1b590b0cc, type: 3}
+      propertyPath: m_Materials.Array.data[1]
+      value: 
+      objectReference: {fileID: 2100000, guid: 79d470d1bf7caa549b46c2e5dfb61bcf, type: 2}
     - target: {fileID: 8117624465362360378, guid: fb5c0c4a26f88c847a76aab1b590b0cc, type: 3}
       propertyPath: m_Name
       value: Scoreboard
@@ -3482,6 +3494,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   display: {fileID: 1195708664}
+  incorrectMaterial: {fileID: 2100000, guid: a46213a1e8db01e489378594c0897d18, type: 2}
+  correctMaterial: {fileID: 2100000, guid: 79d470d1bf7caa549b46c2e5dfb61bcf, type: 2}
+  defaultMaterial: {fileID: 2100000, guid: abd26d1c5d422134a80d96653dcf66aa, type: 2}
 --- !u!1001 &1198868864
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -31,6 +31,7 @@ public class GameManager : MonoBehaviour
         scorebordRef = scoreboardDisplay.GetComponent<Scoreboard>();
         fractionZoneRef = FractionZoneObject.GetComponent<FractionZoneManager>();
         throwZoneRef = throwZoneObject.GetComponent<ThrowManager>();
+        doorTrigger.SetActive(false);
         toggleLights(false);
         fractionValueGen();
     }
@@ -61,8 +62,8 @@ public class GameManager : MonoBehaviour
         if(difficulty == 0){
             int[] denOps = { 2, 3, 4};
             int[] numOps = { 1, 2, 3};
-            tmpFrac[1] = denOps[Random.Range(0, denOps.Length + 1)]; // denominator
-            tmpFrac[0] = numOps[Random.Range(0, tmpFrac[1] )]; // numerator
+            tmpFrac[1] = denOps[Random.Range(0, denOps.Length)]; // denominator
+            tmpFrac[0] = numOps[Random.Range(0, tmpFrac[1] - 1)]; // numerator
         
         }else if(difficulty == 1){
             int[] denOps = { 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12};
@@ -75,7 +76,6 @@ public class GameManager : MonoBehaviour
             int[] numOps = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12 };
             tmpFrac[1] = denOps[Random.Range(0, 13)]; // denominator
             tmpFrac[0] = numOps[Random.Range(0, tmpFrac[1] - 1)]; // numerator
-
         }
 
         // Generate fractions
@@ -95,6 +95,8 @@ public class GameManager : MonoBehaviour
             fractionZoneRef.clearFraction();
             score++;
             scorebordRef.setDisplay(score);
+            scorebordRef.correctAnswer();
+            displayRef.correctAnswer();
 
             if (score == 5)
             {
@@ -102,6 +104,8 @@ public class GameManager : MonoBehaviour
                 canLeave = true;
                 doorTrigger.SetActive(true);
                 toggleLights(true);
+                difficulty++;
+                score = 0;
             }
             else
             {
@@ -109,6 +113,8 @@ public class GameManager : MonoBehaviour
             }
         }else {
             // Reset the fraction zone and generate a new fraction
+            scorebordRef.incorrectAnswer();
+            displayRef.incorrectAnswer();
             throwZoneRef.resetCount();
             fractionZoneRef.clearFraction();
             fractionValueGen();     
