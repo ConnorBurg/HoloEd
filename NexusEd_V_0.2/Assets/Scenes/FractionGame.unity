@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.17276844, g: 0.21589246, b: 0.2978263, a: 1}
+  m_IndirectSpecularColor: {r: 0.17276834, g: 0.21589234, b: 0.29782555, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1800,7 +1800,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &611117865
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6097,6 +6097,64 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 439240, guid: 548a40efc092c6f408cc4d1691b171cc, type: 3}
   m_PrefabInstance: {fileID: 1941781092}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1944697381
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1944697383}
+  - component: {fileID: 1944697382}
+  m_Layer: 0
+  m_Name: TutorialManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1944697382
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1944697381}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 74497ea4b92f3e145babf5f5389d3b89, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  a_Button: {fileID: 0}
+  lGrip: {fileID: 0}
+  b_button: {fileID: 0}
+  x_Button: {fileID: 0}
+  y_Button: {fileID: 0}
+  scoreboardDisplay: {fileID: 0}
+  fractionDisplay: {fileID: 0}
+  tutorialDisplay: {fileID: 0}
+  FractionZoneObject: {fileID: 0}
+  throwZoneObject: {fileID: 0}
+  mainLight: {fileID: 0}
+  particleLight0: {fileID: 0}
+  particleLight1: {fileID: 0}
+  doorTrigger: {fileID: 0}
+  canLeave: 0
+--- !u!4 &1944697383
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1944697381}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.37491354, y: 2.3155372, z: -5.9999204}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 24
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1960532086
 PrefabInstance:
   m_ObjectHideFlags: 0

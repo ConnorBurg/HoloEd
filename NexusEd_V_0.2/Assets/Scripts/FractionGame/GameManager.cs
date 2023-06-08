@@ -15,16 +15,16 @@ public class GameManager : MonoBehaviour
     // Private Variables
     int[] tmpFrac = new int[2];
     int score = 0, difficulty = 0;
-    bool tutActive = true;
+    bool tutTextActive = true;
 
     // Reference Variables
     FractionDisplay displayRef; 
     Scoreboard scorebordRef;
     FractionZoneManager fractionZoneRef;
     ThrowManager throwZoneRef;
-    
-   
 
+
+   
     // Start is called before the first frame update
     void Start(){
         displayRef = fractionDisplay.GetComponent<FractionDisplay>();
@@ -36,15 +36,19 @@ public class GameManager : MonoBehaviour
         fractionValueGen();
     }
 
+    
     // Update is called once per frame
     void Update(){
+
+     
+
         if (canLeave && y_Button.action.triggered) {
             SceneManager.LoadScene("MainArea", LoadSceneMode.Single);
         }
 
         if (x_Button.action.triggered) {
-            tutActive = !tutActive;
-            tutorialDisplay.SetActive(tutActive);
+            tutTextActive = !tutTextActive;
+            tutorialDisplay.SetActive(tutTextActive);
         }
 
         if (a_Button.action.triggered) {
@@ -55,6 +59,7 @@ public class GameManager : MonoBehaviour
             throwZoneRef.resetCount();
             fractionZoneRef.clearFraction();
         }// end of clear
+        
     }// end of update
 
     void fractionValueGen(){
@@ -100,20 +105,19 @@ public class GameManager : MonoBehaviour
             scorebordRef.correctAnswer();
             displayRef.correctAnswer();
 
-            if (score == 5)
-            {
+            if (score == 5){
                 scorebordRef.winner();
                 canLeave = true;
                 doorTrigger.SetActive(true);
                 toggleLights(true);
-                difficulty++;
+                if(difficulty != 2){
+                   difficulty++;
+                }
                 score = 0;
-            }
-            else
-            {
+            }else{
                 fractionValueGen();
             }
-        }else {
+        }else{
             // Reset the fraction zone and generate a new fraction
             scorebordRef.incorrectAnswer();
             displayRef.incorrectAnswer();
