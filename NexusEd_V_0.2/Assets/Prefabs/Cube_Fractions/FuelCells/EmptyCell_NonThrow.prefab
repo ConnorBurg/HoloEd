@@ -9,7 +9,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 100000, guid: 3f75e2b758e484d41b440ab74cc321e5, type: 3}
       propertyPath: m_Name
-      value: FuelCell_E 1
+      value: EmptyCell_NonThrow
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 3f75e2b758e484d41b440ab74cc321e5, type: 3}
+      propertyPath: m_TagString
+      value: Untagged
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 3f75e2b758e484d41b440ab74cc321e5, type: 3}
       propertyPath: m_RootOrder
@@ -204,7 +208,7 @@ MonoBehaviour:
   m_SmoothRotation: 0
   m_SmoothRotationAmount: 5
   m_TightenRotation: 0.5
-  m_ThrowOnDetach: 1
+  m_ThrowOnDetach: 0
   m_ThrowSmoothingDuration: 0.25
   m_ThrowSmoothingCurve:
     serializedVersion: 2

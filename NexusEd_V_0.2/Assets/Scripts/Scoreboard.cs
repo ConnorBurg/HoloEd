@@ -6,11 +6,13 @@ using UnityEngine;
 public class Scoreboard : MonoBehaviour
 {
     public GameObject display;
+    public Material incorrectMaterial, correctMaterial, defaultMaterial;
     // Start is called before the first frame update
     void Start()
     {
-        // Default
-        this.GetComponentInChildren<TMP_Text>().text = "0";
+        GameObject cubeRef = display.transform.GetChild(0).gameObject;
+        MeshRenderer renderer = cubeRef.GetComponent<MeshRenderer>(); 
+        
     }
 
     /* Update is called once per frame
@@ -25,7 +27,41 @@ public class Scoreboard : MonoBehaviour
         this.GetComponentInChildren<TMP_Text>().text = "Score: " + score;
     }
 
-    public void winner() {
-        this.GetComponentInChildren<TMP_Text>().text = "Engine Restart Complete! Press Y to go back to the Main Area!";
+    public void correctAnswer(){
+
+        StartCoroutine(SwapMaterialsAfterDelay(1.0f, correctMaterial, 2));
     }
+    public void incorrectAnswer(){
+
+        StartCoroutine(SwapMaterialsAfterDelay(1.0f, incorrectMaterial, 1));
+    }
+
+    public void winner() {
+
+            StartCoroutine(SwapMaterialsAfterDelay(5.0f, correctMaterial, 0));
+    }
+
+
+    private IEnumerator SwapMaterialsAfterDelay(float delay, Material material, int flag)
+    {
+     
+        if(flag == 0){
+            this.GetComponentInChildren<TMP_Text>().text = "Engine Restarting... You Win! Difficulty Increased!";
+            yield return new WaitForSeconds(delay);
+            setDisplay(0);
+            
+        }else{
+            GameObject cubeRef = display.transform.GetChild(0).gameObject;
+            Renderer renderer = cubeRef.GetComponent<MeshRenderer>();
+            renderer.material = material;
+            yield return new WaitForSeconds(delay);
+            // Return to normal state
+            renderer.material = defaultMaterial;
+        }
+        
+        
+    }
+
+    
+    
 }

@@ -9,7 +9,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 100000, guid: 3f75e2b758e484d41b440ab74cc321e5, type: 3}
       propertyPath: m_Name
-      value: FuelCell_F 1
+      value: FullCell
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 3f75e2b758e484d41b440ab74cc321e5, type: 3}
+      propertyPath: m_TagString
+      value: fullCell
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 3f75e2b758e484d41b440ab74cc321e5, type: 3}
       propertyPath: m_RootOrder
@@ -86,11 +90,11 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6117137816281641163}
   serializedVersion: 2
-  m_Mass: 1
+  m_Mass: 0.6
   m_Drag: 0
   m_AngularDrag: 0.05
-  m_UseGravity: 0
-  m_IsKinematic: 1
+  m_UseGravity: 1
+  m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
@@ -115,7 +119,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6117137816281641163}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0ad34abafad169848a38072baa96cdb2, type: 3}
   m_Name: 
