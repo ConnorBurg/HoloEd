@@ -11,6 +11,8 @@ public class FractionManager : MonoBehaviour
     public InputActionReference a_Button = null, lGrip = null, rGrip = null;
     XRRayInteractor leftRay, rightRay;
     GameObject currCell = null;
+    public delegate void OnPickUp();
+    public static OnPickUp onPickUp;
 
     GameObject rightHitObject, leftHitObject;
     // Start is called before the first frame update
@@ -42,19 +44,25 @@ public class FractionManager : MonoBehaviour
         // Right Hand Spawns
         if(rightHitObject.tag == "FullBin" && rGrip.action.triggered && currCell == null){
             // Spawn a new fullCell at the point where the raycast hits the fullbin
-            currCell = Instantiate(fullCell, rightInfo.point, Quaternion.identity);  
-        }else if(rightHitObject.tag == "EmptyBin" && rGrip.action.triggered && currCell == null){
+            currCell = Instantiate(fullCell, rightInfo.point, Quaternion.identity);
+            onPickUp?.Invoke();
+        }
+        else if(rightHitObject.tag == "EmptyBin" && rGrip.action.triggered && currCell == null){
             // Spawn a new emptyCell at the point where the raycast hits the emptybin
             currCell = Instantiate(emptyCell, rightInfo.point, Quaternion.identity);
+            onPickUp?.Invoke();
         }
     
         // Left Hand Spawns
         if(leftHitObject.tag == "FullBin" && lGrip.action.triggered && currCell == null){
             // Spawn a new fullCell at the point where the raycast hits the fullbin
             currCell = Instantiate(fullCell, leftInfo.point, Quaternion.identity);
-        }else if(leftHitObject.tag == "EmptyBin" && lGrip.action.triggered && currCell == null){
+            onPickUp?.Invoke();
+        }
+        else if(leftHitObject.tag == "EmptyBin" && lGrip.action.triggered && currCell == null){
             // Spawn a new emptyCell at the point where the raycast hits the emptybin
             currCell = Instantiate(emptyCell, leftInfo.point, Quaternion.identity);
+            onPickUp?.Invoke();
         }
     }
 }

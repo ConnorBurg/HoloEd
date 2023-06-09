@@ -22,6 +22,11 @@ public class Scoreboard : MonoBehaviour
     }
 */
     // Called externally to set the display
+    public void tutorialPrompt(int remGreen, int remGray)
+    {
+        this.GetComponentInChildren<TMP_Text>().text = "Add " + remGreen + " Green cells.\nAdd " + remGray + " Gray cells.";
+    }
+
     public void setDisplay(int score)
     {
         this.GetComponentInChildren<TMP_Text>().text = "Score: " + score;

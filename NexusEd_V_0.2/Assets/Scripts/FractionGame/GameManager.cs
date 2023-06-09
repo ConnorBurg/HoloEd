@@ -11,11 +11,19 @@ public class GameManager : MonoBehaviour
     public GameObject scoreboardDisplay, fractionDisplay, tutorialDisplay, FractionZoneObject, throwZoneObject, mainLight, particleLight0, particleLight1;
     public GameObject doorTrigger;
     public bool canLeave = false;
+    public delegate void OnComplete();
+    public static OnComplete onComplete;
+    public static int[] tmpFrac = new int[2];
 
     // Private Variables
+<<<<<<< Updated upstream
     int[] tmpFrac = new int[2];
     int score = 0, difficulty = 0;
     bool tutActive = true;
+=======
+    int score = -1, difficulty = 0;
+    bool tutTextActive = true;
+>>>>>>> Stashed changes
 
     // Reference Variables
     FractionDisplay displayRef; 
@@ -35,7 +43,11 @@ public class GameManager : MonoBehaviour
         toggleLights(false);
         fractionValueGen();
     }
+<<<<<<< Updated upstream
 
+=======
+    
+>>>>>>> Stashed changes
     // Update is called once per frame
     void Update(){
         if (canLeave && y_Button.action.triggered) {
@@ -91,6 +103,7 @@ public class GameManager : MonoBehaviour
         float checkDiv = ((float)tmpFrac[0]) / ((float)tmpFrac[1]);
 
         if ((num == tmpFrac[0]) && (den == tmpFrac[1]) || (div == checkDiv)){ // Correct!
+<<<<<<< Updated upstream
 
             // Reset the fraction zone and generate a new fraction
             throwZoneRef.resetCount();
@@ -114,6 +127,41 @@ public class GameManager : MonoBehaviour
                 fractionValueGen();
             }
         }else {
+=======
+            if (FractionTutorial.tutState != -1)
+            {
+                onComplete?.Invoke();
+            }
+            else
+            {
+                // Reset the fraction zone and generate a new fraction
+                throwZoneRef.resetCount();
+                fractionZoneRef.clearFraction();
+                score++;
+                scorebordRef.setDisplay(score);
+                scorebordRef.correctAnswer();
+                displayRef.correctAnswer();
+
+                if (score == 5)
+                {
+                    scorebordRef.winner();
+                    canLeave = true;
+                    doorTrigger.SetActive(true);
+                    toggleLights(true);
+                    if (difficulty != 2)
+                    {
+                        difficulty++;
+                    }
+                    score = 0;
+                }
+                else
+                {
+                    fractionValueGen();
+                }
+            }
+
+        }else{
+>>>>>>> Stashed changes
             // Reset the fraction zone and generate a new fraction
             scorebordRef.incorrectAnswer();
             displayRef.incorrectAnswer();

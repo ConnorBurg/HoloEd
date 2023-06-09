@@ -6,7 +6,9 @@ public class ThrowManager : MonoBehaviour
 {
     public GameObject fractionZoneObject;
     FractionZoneManager fractionZoneRef;
-    
+    public delegate void OnSuccessfulThrow();
+    public static OnSuccessfulThrow onSuccessfulThrow;
+    public Scoreboard scorebordRef;
 
     // fractionCount[0] == Number of fullCells 
     // fractionCount[1] == Number of emptyCells
@@ -39,7 +41,8 @@ public class ThrowManager : MonoBehaviour
         //if the object is a fraction
         if (other.gameObject.tag == "fullCell" || other.gameObject.tag == "emptyCell")
         {
-            if(other.gameObject.tag == "fullCell")
+            onSuccessfulThrow?.Invoke();
+            if (other.gameObject.tag == "fullCell")
             {
                 fractionCount[0]++;
             }
@@ -50,7 +53,9 @@ public class ThrowManager : MonoBehaviour
 
             Destroy(other.gameObject);
             fractionZoneRef.redraw(fractionCount);
-            
+            int[] tmpFrac = GameManager.tmpFrac;
+            if (FractionTutorial.tutState != -1)
+                scorebordRef.tutorialPrompt(tmpFrac[0] - fractionCount[0], tmpFrac[1] - tmpFrac[0] - fractionCount[1]);
         }
     }
 }
